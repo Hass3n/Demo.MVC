@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Demo.DAL.Data.Repositries.interfcae;
 using Demo.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Demo.DAL.Data.Repositries.Classes
 {
@@ -19,17 +20,25 @@ namespace Demo.DAL.Data.Repositries.Classes
         }
         public int Delete(Department Entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Departments.Remove(Entity);
+            return _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Department> GetAll()
+        public IEnumerable<Department> GetAll(bool withTracking = false)
         {
-            throw new NotImplementedException();
+            if (withTracking)
+            {
+                return _dbContext.Departments.ToList();
+            }
+            else
+                return _dbContext.Departments.AsNoTracking().ToList();
         }
 
         public Department GetById(int id)
         {
-            throw new NotImplementedException();
+
+            // serch first local if data found returen Data if data not local serch in Database
+            return _dbContext.Departments.Find(id);
         }
 
         public int Add(Department Entity)
@@ -42,7 +51,8 @@ namespace Demo.DAL.Data.Repositries.Classes
 
         public int Upadte(Department Entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Departments.Update(Entity);
+         return   _dbContext.SaveChanges();
         }
     }
 }

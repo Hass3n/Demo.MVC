@@ -12,16 +12,16 @@ namespace Demo.DAL.Data
 {
     public class AppDpContext :DbContext
     {
-        public AppDpContext()
+        public AppDpContext(DbContextOptions<AppDpContext> options):base(options)
         {
             
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
 
-            optionsBuilder.UseSqlServer("server=.;database=MVC_43;Trusted_Connection=true;");
+        //    optionsBuilder.UseSqlServer("server=.;database=MVC_43;Trusted_Connection=true;");
 
-        }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

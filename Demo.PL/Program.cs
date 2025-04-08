@@ -1,5 +1,9 @@
 using System;
+using Demo.BLL.Services;
 using Demo.DAL.Data;
+using Demo.DAL.Data.Repositries.Classes;
+using Demo.DAL.Data.Repositries.interfcae;
+using Microsoft.EntityFrameworkCore;
 
 namespace Demo.PL
 {
@@ -13,7 +17,24 @@ namespace Demo.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<AppDpContext>(); // Allow DI for  AppDpContext
+            /*   builder.Services.AddScoped<AppDpContext>();*/ // Allow DI for  AppDpContext
+
+            // add register services for  dbContextoption and dbContext
+
+            builder.Services.AddDbContext<AppDpContext>(options =>
+            {
+
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections"));
+            });
+
+
+            // when clr create object IDepartmentRepostry create object for DepartmentRepostry
+
+            builder.Services.AddScoped<IDepartmentRepostry,DepartmentRepostry>();
+
+
+            builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
+
             #endregion
 
             var app = builder.Build();
