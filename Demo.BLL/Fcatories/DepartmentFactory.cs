@@ -38,7 +38,9 @@ namespace Demo.BLL.Fcatories
                 Description = D.Description,
                 Code = D.Code,
                 CreatedOn = DateOnly.FromDateTime(D.CreatedOn.Value),
-                LastModifiedBy = D.LastModifiedBy
+                LastModifiedBy = D.LastModifiedBy,
+                CreatedBy=D.CreatedBy,
+               LastModifiedOn=D.LastModifiedOn
 
             };
 
@@ -69,7 +71,7 @@ namespace Demo.BLL.Fcatories
                 Name = updateDepartmentDto.Name,
                 Code = updateDepartmentDto.code,
                 Description = updateDepartmentDto.Description,
-                CreatedOn = updateDepartmentDto.DateofCreation.ToDateTime(new TimeOnly()) // add time with Date
+                CreatedOn = updateDepartmentDto.DateofCreation?.ToDateTime(new TimeOnly()) // add time with Date
 
             };
 
