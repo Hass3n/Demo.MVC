@@ -5,7 +5,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Demo.DAL.Data.Configuration;
-using Demo.DAL.Models;
+using Demo.DAL.Models.DepartmentModel;
+using Demo.DAL.Models.EmployeeDepartment;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.DAL.Data
@@ -36,6 +37,9 @@ namespace Demo.DAL.Data
 
         // Bd set to convert proprty to table in database
 
-        public DbSet<Department> Departments { get; set; }  // table
+        public DbSet<Department> Departments { get; set; }  //Departments  table
+
+
+        public DbSet<Employee> Employeee { get; set; }//  Employees table
     }
 }

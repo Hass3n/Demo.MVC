@@ -4,8 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Demo.BLL.DTO;
-using Demo.DAL.Models;
+using Demo.BLL.DTO.DepartmentDto;
+using Demo.DAL.Models.DepartmentModel;
 
 namespace Demo.BLL.Fcatories
 {

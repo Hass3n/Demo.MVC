@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Demo.DAL.Models;
 
-namespace Demo.BLL.DTO
+namespace Demo.BLL.DTO.DepartmentDto
+
 {
-   public class DepartmentDetailsDto
+    public class DepartmentDetailsDto
     {
 
         // constructor mapping

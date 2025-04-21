@@ -19,6 +19,6 @@ namespace Demo.DAL.Models
 
         public DateTime? LastModifiedOn { get; set; }//  contain Time Modified this Data[Automatic calaculated]
 
-        public bool IsDeleted { get; set; } // soft deleted
+        public bool IsDeleted { get; set; } = false; // soft deleted
     }
 }

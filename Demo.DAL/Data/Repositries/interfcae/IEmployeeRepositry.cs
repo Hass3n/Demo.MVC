@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Demo.DAL.Models.DepartmentModel;
+using Demo.DAL.Models.EmployeeDepartment;
 
 namespace Demo.DAL.Data.Repositries.interfcae
 {
-    public interface IDepartmentRepostry:IGenericRepositry<Department>
+    public interface IEmployeeRepositry:IGenericRepositry<Employee>
     {
 
-
-        IQueryable<Department> GetAllDepartment();
-    
-
+        IQueryable<Employee> getEmployeeByAddress(string address);
     }
 }

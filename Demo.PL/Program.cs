@@ -1,5 +1,7 @@
-using System;
-using Demo.BLL.Services;
+﻿using System;
+using Demo.BLL.Profiles;
+using Demo.BLL.Services.Classes;
+using Demo.BLL.Services.Interface;
 using Demo.DAL.Data;
 using Demo.DAL.Data.Repositries.Classes;
 using Demo.DAL.Data.Repositries.interfcae;
@@ -34,6 +36,18 @@ namespace Demo.PL
 
 
             builder.Services.AddScoped<IDepartmentServices, DepartmentServices>();
+
+            builder.Services.AddScoped<IEmployeeRepositry, EmployeeRepsoitry>();
+
+            builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
+
+            //  بس الطريقه دي ساعات بتضرب ايرور  Mapper يعمل اوبجكت من clr عشان ال
+
+            //builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+            // (DI) Mapper يعمل اوبجكت من clr الطريقه الثانيه تطلب فيها من
+            builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfiles()));
+           
 
             #endregion
 
