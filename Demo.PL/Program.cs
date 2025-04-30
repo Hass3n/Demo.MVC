@@ -1,5 +1,6 @@
 ﻿using System;
 using Demo.BLL.Profiles;
+using Demo.BLL.Services.AttatchmentServices;
 using Demo.BLL.Services.Classes;
 using Demo.BLL.Services.Interface;
 using Demo.DAL.Data;
@@ -27,6 +28,8 @@ namespace Demo.PL
             {
 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections"));
+                // lazy loading to load Related Data from Many tables
+                options.UseLazyLoadingProxies();
             });
 
 
@@ -40,6 +43,8 @@ namespace Demo.PL
             builder.Services.AddScoped<IEmployeeRepositry, EmployeeRepsoitry>();
 
             builder.Services.AddScoped<IEmployeeServices, EmployeeServices>();
+            builder.Services.AddScoped<InUnitOfWork, UnitofWork>();
+            builder.Services.AddScoped<IAttatchmantServices, AttatchmentServices>();
 
             //  بس الطريقه دي ساعات بتضرب ايرور  Mapper يعمل اوبجكت من clr عشان ال
 

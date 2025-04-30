@@ -10,6 +10,6 @@ namespace Demo.DAL.Data.Repositries.interfcae
     public interface IEmployeeRepositry:IGenericRepositry<Employee>
     {
 
-        IQueryable<Employee> getEmployeeByAddress(string address);
+        IQueryable<Employee> getEmployeeByName(string Name);
     }
 }

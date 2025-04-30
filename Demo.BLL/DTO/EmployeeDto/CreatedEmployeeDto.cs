@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Demo.DAL.Models.EmployeeDepartment;
+using Microsoft.AspNetCore.Http;
 
 namespace Demo.BLL.DTO.EmployeeDto
 {
@@ -38,5 +39,9 @@ namespace Demo.BLL.DTO.EmployeeDto
 
         [Display(Name ="Employee Type")]
         public EmployeeType EmployeeType { get; set; }
+
+        public int? DepartmentId { get; set; }
+
+        public IFormFile?  Image { get; set; }
     }
 }

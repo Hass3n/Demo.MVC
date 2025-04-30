@@ -21,6 +21,10 @@ namespace Demo.DAL.Data.Configuration
             builder.Property(D => D.Code).HasColumnType("varchar(20)");
             builder.Property(D => D.CreatedOn).HasDefaultValueSql("GETDATE()");
             builder.Property(D => D.LastModifiedOn).HasComputedColumnSql("GETDATE()");
+            builder.HasMany(D => D.Employees)
+                    .WithOne(e => e.Departments).OnDelete(DeleteBehavior.Cascade);
+
+            // لو مسحت اي قسم يمسح الموظفين المرتطبطين بيه DeleteBehavior.Cascade
 
 
             // call method in  BaseEntityConfiguration

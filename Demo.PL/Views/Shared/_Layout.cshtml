@@ -52,6 +52,20 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+@*     @await RenderSectionAsync("Scripts", required: false)
+ *@
+
+
+
+    @*     client side validation 
+    وبيروح يعمل فلاديشن في البروزار قبل ما يبعت للباك أند
+  create.Chtml    الي موجود في ملف Jequery  وعشان يعمل رنضر ل جزء ال 
+ *@    
+
+   
+@*  views  في كل  validtionscript تعني اني مش لازم الاقي false
+ *@
+    @RenderSection("validtionscript", false)
+    @RenderSection("DepartmentValidation",false)
 </body>
 </html>

@@ -11,7 +11,7 @@ using Demo.DAL.Models;
 
 namespace Demo.BLL.Services.Classes
 {
-    public class DepartmentServices(IDepartmentRepostry _departmentRepostry) : IDepartmentServices
+    public class DepartmentServices(InUnitOfWork _uUnitOfWork /*IDepartmentRepostry _departmentRepostry*/) : IDepartmentServices
     {
         // private readonly IDepartmentRepostry _departmentRepostry = departmentRepostry;
 
@@ -20,7 +20,7 @@ namespace Demo.BLL.Services.Classes
 
         public IEnumerable<DepartmentDto> GetAllDepartments()
         {
-            var departments = _departmentRepostry.GetAll();
+            var departments = _uUnitOfWork.DepartmentRepostry.GetAll();
 
             #region Manual mapping
             // Manual mapping --- make map to Department to  DepartmentDto
@@ -51,7 +51,7 @@ namespace Demo.BLL.Services.Classes
 
         public DepartmentDetailsDto? GetDepartmentById(int id)
         {
-            var department = _departmentRepostry.GetById(id);
+            var department = _uUnitOfWork.DepartmentRepostry.GetById(id);
             #region Manula mapping
             //if (department == null) return null;
             //else
@@ -118,29 +118,34 @@ namespace Demo.BLL.Services.Classes
 
 
 
-        public int AddDepartment(CreatedDepartmentDto departmentDto)
+        public int  AddDepartment(CreatedDepartmentDto departmentDto)
         {
 
             var department = departmentDto.ToEntity();
-            return _departmentRepostry.Add(department);
+             _uUnitOfWork.DepartmentRepostry.Add(department);
+
+            return _uUnitOfWork.SaveChanges();
+            
         }
 
         public int UpdateDepartment(UpdateDepartmentDto departmentDto)
         {
 
-            return _departmentRepostry.Upadte(departmentDto.ToEntity());
+             _uUnitOfWork.DepartmentRepostry.Upadte(departmentDto.ToEntity());
+
+            return _uUnitOfWork.SaveChanges();
         }
 
         public bool DeleteDepartment(int id)
         {
-            var department = _departmentRepostry.GetById(id);
+            var department = _uUnitOfWork.DepartmentRepostry.GetById(id);
 
             if (department is null) return false;
 
             else
             {
-                int result = _departmentRepostry.Delete(department);
-                return result > 0 ? true : false;
+                _uUnitOfWork.DepartmentRepostry.Delete(department);
+                return _uUnitOfWork.SaveChanges() > 0 ? true : false;
 
             }
 

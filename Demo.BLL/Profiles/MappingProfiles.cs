@@ -21,7 +21,9 @@ namespace Demo.BLL.Profiles
             // كذلك لو مختلفين في نوع الداتا طيب 
             CreateMap<Employee, EmployeeDto>()
                 .ForMember(des => des.mGender, option => option.MapFrom(src => src.gander))
-                .ForMember(des => des.EmpType, option => option.MapFrom(src => src.employeeType));
+                .ForMember(des => des.EmpType, option => option.MapFrom(src => src.employeeType))
+                 .ForMember(des => des.Department, option => option.MapFrom(src => src.Departments != null ? src.Departments.Name : null));
+
 
             CreateMap<Employee, EmployeeDetailsDto>()
                  .ForMember(des => des.Gender, option => option.MapFrom(src => src.gander))

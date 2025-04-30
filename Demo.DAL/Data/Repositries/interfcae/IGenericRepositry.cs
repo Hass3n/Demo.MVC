@@ -19,15 +19,15 @@ namespace Demo.DAL.Data.Repositries.interfcae
 
         //upadte
 
-        int Upadte(TEntity Entity);
+        void Upadte(TEntity Entity);
 
         // Delete 
-        int Delete(TEntity Entity);
+        void Delete(TEntity Entity);
 
 
         // Add
 
-        int Add(TEntity Entity);
+        void Add(TEntity Entity);
 
     }
 }

@@ -12,10 +12,10 @@ namespace Demo.DAL.Data.Repositries.Classes
     public class GenericRepositry<TEntity>(AppDpContext _dbContext):IGenericRepositry<TEntity> where TEntity : BaseEntity
     {
 
-        public int Delete(TEntity Entity)
+        public void Delete(TEntity Entity)
         {
             _dbContext.Set<TEntity>().Remove(Entity);
-            return _dbContext.SaveChanges();
+            //return _dbContext.SaveChanges();
         }
 
         public IEnumerable<TEntity> GetAll(bool withTracking = false)
@@ -35,18 +35,18 @@ namespace Demo.DAL.Data.Repositries.Classes
             return _dbContext.Set<TEntity>().Find(id);
         }
 
-        public int Add(TEntity Entity)
+        public void Add(TEntity Entity)
         {
 
             _dbContext.Set<TEntity>().Add(Entity); // added
 
-            return _dbContext.SaveChanges();  // upadte Database
+            //return _dbContext.SaveChanges();  // upadte Database
         }
 
-        public int Upadte(TEntity Entity)
+        public void Upadte(TEntity Entity)
         {
             _dbContext.Set<TEntity>().Update(Entity);
-            return _dbContext.SaveChanges();
+            //return _dbContext.SaveChanges();
         }
     }
 }

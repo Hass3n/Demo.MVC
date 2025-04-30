@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Demo.DAL.Models.DepartmentModel;
 
 namespace Demo.DAL.Models.EmployeeDepartment
 {
@@ -26,6 +27,16 @@ namespace Demo.DAL.Models.EmployeeDepartment
         public Gander gander { get; set; }
 
         public EmployeeType employeeType { get; set; }
+
+        // Navigation Property  one (Department)
+
+        public int? DepartmentId { get; set; } //Fk
+        public virtual Department? Departments { get; set; }
+
+
+        public string? imageName { get; set; }
+
+
 
     }
 }

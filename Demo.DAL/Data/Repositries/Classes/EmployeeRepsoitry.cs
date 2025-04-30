@@ -11,9 +11,9 @@ namespace Demo.DAL.Data.Repositries.Classes
 
     public class EmployeeRepsoitry(AppDpContext dbContext) : GenericRepositry<Employee>(dbContext), IEmployeeRepositry
     {
-        public IQueryable<Employee> getEmployeeByAddress(string address)
+        public IQueryable<Employee> getEmployeeByName(string name)
         {
-            throw new NotImplementedException();
+          return  dbContext.Employeee.Where(e=>e.Name.ToLower().Contains(name));
         }
     }
 }

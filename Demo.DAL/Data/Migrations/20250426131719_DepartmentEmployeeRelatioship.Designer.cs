@@ -4,6 +4,7 @@ using Demo.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,16 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Demo.DAL.Data.Migrations
 {
     [DbContext(typeof(AppDpContext))]
-    partial class AppDpContextModelSnapshot : ModelSnapshot
+    [Migration("20250426131719_DepartmentEmployeeRelatioship")]
+    partial class DepartmentEmployeeRelatioship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.15")
-                .HasAnnotation("Proxies:ChangeTracking", false)
-                .HasAnnotation("Proxies:CheckEquality", false)
-                .HasAnnotation("Proxies:LazyLoading", true)
+                .HasAnnotation("ProductVersion", "8.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -130,9 +130,6 @@ namespace Demo.DAL.Data.Migrations
 
                     b.Property<DateTime>("hireDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("imageName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

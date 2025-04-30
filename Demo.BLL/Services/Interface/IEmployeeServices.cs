@@ -16,6 +16,10 @@ namespace Demo.BLL.Services.Interface
         IEnumerable<EmployeeDto> getAllEmployee(bool withTracking = false);
 
 
+        IEnumerable<EmployeeDto> searchEmployeeByName(string name);
+
+
+
         // Get Employee by Id
 
         EmployeeDetailsDto? getEmployeeByID(int id);

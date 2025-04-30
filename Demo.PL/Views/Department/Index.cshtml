@@ -37,18 +37,12 @@
                     <td>@department.Name</td>
                     <td>@department.Description</td>
                     <td>@department.DateOfCreation</td>
-                    <td>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@department.Id">
-                            <i class="fas fa-eye me-2"></i>Details
-                    </a> </td>
 
-                    <td>
-                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@department.Id">
-                            <i class="fas fa-edit me-2"></i>Edit
-                        </a> 
-                    </td>
+                    @* @Html.PartialAsync("_buttonPartialView",department.Id) *@
 
-                    <td>
+                     <partial name="_buttonPartialView" model="@department.Id"/>
+
+                    <td> 
                     @*     <a class="btn btn-danger" asp-action="Delete" asp-route-id="@department.Id">
                             <i class="fas fa-trash me-2"></i>Delete
                         </a>  *@
