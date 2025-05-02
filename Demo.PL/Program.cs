@@ -6,6 +6,8 @@ using Demo.BLL.Services.Interface;
 using Demo.DAL.Data;
 using Demo.DAL.Data.Repositries.Classes;
 using Demo.DAL.Data.Repositries.interfcae;
+using Demo.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.PL
@@ -52,7 +54,32 @@ namespace Demo.PL
 
             // (DI) Mapper يعمل اوبجكت من clr الطريقه الثانيه تطلب فيها من
             builder.Services.AddAutoMapper(M => M.AddProfile(new MappingProfiles()));
-           
+
+
+            // add services for security first way
+            //builder.Services.AddScoped < UserManager<applicationUser>>();
+            //builder.Services.AddScoped<SignInManager<applicationUser>>();
+            //builder.Services.AddScoped<RoleManager<IdentityRole>>();
+
+
+            // add services for security second way
+
+            builder.Services.AddIdentity<applicationUser, IdentityRole>(
+
+                option =>
+                {
+
+                    // كده المستخدم لازم يدخل أيميل يكون مش مستخدم قبل كده
+                    //option.User.RequireUniqueEmail = true;
+
+
+                }
+
+
+
+                // register store Repositry to Enable used Method inside this like servieces call Method iside Respositry
+                ).AddEntityFrameworkStores<AppDpContext>();
+
 
             #endregion
 
@@ -71,11 +98,13 @@ namespace Demo.PL
 
             app.UseRouting();
 
+            // Two Middle ware to eanble user Login and use action based on Roles
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Register}/{id?}");
 
             app.Run();
         }

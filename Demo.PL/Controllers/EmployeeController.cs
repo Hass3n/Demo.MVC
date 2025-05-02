@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 namespace Demo.PL.Controllers
 {
     public class EmployeeController(IMapper _mapper,IEmployeeServices _employeeServices,ILogger<EmployeeController> _logger,IWebHostEnvironment _envirnoment) : Controller
-    {
+    { 
         public IActionResult Index(string? EmployeeSearchName)
         {
             // save Data from Temp Data if you index go to anthor actio the Data is saved
@@ -143,11 +143,7 @@ namespace Demo.PL.Controllers
 
 
 
-            // get full path images
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files/Images", employee.imageName);
-            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-
-            IFormFile formFile = new FormFile(fileStream, 0, fileStream.Length, "Images", employee.imageName);
+        
 
 
 
@@ -165,7 +161,6 @@ namespace Demo.PL.Controllers
                 EmployeeType = Enum.Parse<EmployeeType>(employee.EmployeeType),
                 Gender = Enum.Parse<Gander>(employee.Gender),
                 IsActive = employee.IsActive,
-                Image=formFile
 
 
 
