@@ -78,7 +78,7 @@ namespace Demo.PL
 
 
                 // register store Repositry to Enable used Method inside this like servieces call Method iside Respositry
-                ).AddEntityFrameworkStores<AppDpContext>();
+                ).AddEntityFrameworkStores<AppDpContext>().AddDefaultTokenProviders();
 
 
             #endregion

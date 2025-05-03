@@ -1,8 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Demo.DAL.Models;
+using Demo.PL.Utlities;
 using Demo.PL.viewModels.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace Demo.PL.Controllers
 {
@@ -144,6 +146,13 @@ namespace Demo.PL.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult CheckyourInbox()
+        {
+            return View();
+        }
+
+
         public IActionResult SendResetPasswordLink(ForgetPasswordViewModel viewModel)
         {
             if(ModelState.IsValid)
@@ -152,7 +161,27 @@ namespace Demo.PL.Controllers
                 var user = _userManager.FindByEmailAsync(viewModel.Email).Result;
                 if(user is not null)
                 {
+                    // create Link with send To Email
+
+                    //AddDefaultTokenProviders تضيف ده programe  محتاج في  Login غير الي بيتعمل في token ده 
+                    var token = _userManager.GeneratePasswordResetTokenAsync(user).Result;
+
+                    var resetPasswordUrl = Url.Action("ResetPassword", "Account", new { email = viewModel.Email, token = token },Request.Scheme);
+
+
                     // send mail
+
+                    var email = new Emails()
+                    {
+                        To = viewModel.Email,
+                        Subject = "Reset Password",
+                        Body = resetPasswordUrl
+
+                    };
+
+                    Emailsetting.sendEmail(email);
+
+                    return RedirectToAction("CheckyourInbox");
                 }
                
            
@@ -160,6 +189,50 @@ namespace Demo.PL.Controllers
 
             ModelState.AddModelError(string.Empty, "Invalid Opertion");
             return View(nameof(ForgetPassword), viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult ResetPassword(string email,string token)
+        {
+            // send Data from request to other request
+            // email token هيجيب من اللينك الي بيتبعت علي الايميل 
+            TempData["email"] = email;
+            TempData["token"] = token;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordViewModel viewModel)
+        {
+            if (!ModelState.IsValid) return View(viewModel);
+
+            string email = TempData["email"] as string ??string.Empty;
+            string token = TempData["token"] as string ?? string.Empty;
+            var user = _userManager.FindByEmailAsync(email).Result;
+            if(user is not null)
+            {
+              var result=  _userManager.ResetPasswordAsync(user, token, viewModel.Password).Result;
+
+                if (result.Succeeded)
+                    return RedirectToAction(nameof(LoginIn));
+     
+
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+
+                        ModelState.AddModelError(string.Empty, item.Description);
+                    }
+                }
+                 
+                
+
+
+            }
+
+            return View(nameof(ResetPassword),viewModel);
+
         }
         #endregion
     }
